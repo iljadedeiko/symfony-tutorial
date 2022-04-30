@@ -27,6 +27,9 @@ class Movie
     #[ORM\ManyToMany(targetEntity: Actor::class, inversedBy: 'movies')]
     private $actors;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $imagePath;
+
     public function __construct()
     {
         $this->actors = new ArrayCollection();
@@ -95,5 +98,15 @@ class Movie
         $this->actors->removeElement($actor);
 
         return $this;
+    }
+
+    public function getImagePath()
+    {
+        return $this->imagePath;
+    }
+
+    public function setImagePath($imagePath): void
+    {
+        $this->imagePath = $imagePath;
     }
 }
