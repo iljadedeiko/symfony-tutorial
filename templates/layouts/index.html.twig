@@ -4,9 +4,12 @@
 
 {% block body %}
 
-    {{ author }}
+    <h1 class="bg-blue-500 text-2xl text-center font-bold">{{ author }}</h1>
+    <img src="{{ asset('build/images/pic.jpg') }}" alt="">
     <div>
-        <a href="/movies/create" class="">Create New</a>
+        <a href="/movies/create">
+            <button type="button" class="btn btn-primary">Create New</button>
+        </a>
     </div>
 
 {% endblock %}
