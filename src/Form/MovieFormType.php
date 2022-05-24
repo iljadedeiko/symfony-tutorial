@@ -40,12 +40,9 @@ class MovieFormType extends AbstractType
                 'label' => false,
             ])
             ->add('imagePath', FileType::class, [
-                'attr' => array(
-                    'class' => 'form-control py-10',
-                ),
-                'label' => false,
-            ])
-//            ->add('actors')
+                'required' => false,
+                'mapped' => false,
+            ]);
         ;
     }
 
