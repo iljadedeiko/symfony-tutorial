@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\Movie;
@@ -16,7 +18,7 @@ class MoviesController extends AbstractController
 {
     private EntityManagerInterface $em;
 
-    private $movieRepository;
+    private MovieRepository $movieRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -26,13 +28,14 @@ class MoviesController extends AbstractController
         $this->movieRepository = $movieRepository;
     }
 
-    #[Route('/movies', name: 'movies')]
+    #[Route('/movies', name: 'movies', methods: ['GET'])]
     public function index(): Response
     {
-        $repository = $this->em->getRepository(Movie::class);
-        $movies = $repository->getClassName();
+        $movies = $this->movieRepository->findAll();
 
-        return $this->render('layouts/index.html.twig');
+        return $this->render('movies/index.html.twig', [
+            'movies' => $movies
+        ]);
     }
 
     #[Route('/movies/create', name: 'create_movie')]
@@ -67,8 +70,18 @@ class MoviesController extends AbstractController
             return $this->redirectToRoute('movies');
         }
 
-        return $this->render('layouts/create.html.twig', [
+        return $this->render('movies/create.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/movies/{id}', name: 'movies.show', methods: ['GET'])]
+    public function show($id): Response
+    {
+        $movie = $this->movieRepository->find($id);
+
+        return $this->render('movies/show.html.twig', [
+            'movie' => $movie,
         ]);
     }
 }
