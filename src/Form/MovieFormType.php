@@ -17,33 +17,43 @@ class MovieFormType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Enter title...'
-                ),
-                'label' => false,
-
+                'attr' =>
+                    [
+                        'class' => 'form-control bg-transparent block border-w-2 w-full h-20 text-4xl',
+                        'placeholder' => 'Enter title...'
+                    ],
+                    'label' => false,
+                    'required' => false
             ])
             ->add('releaseYear', IntegerType::class, [
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Enter Release Year'
-                ),
-                'label' => false,
+                'attr' =>
+                    [
+                        'class' => 'form-control mt-10 bg-transparent block border-w-2 w-full h-20 text-4xl',
+                        'placeholder' => 'Enter Release Year'
+                    ],
+                    'label' => false,
+                    'required' => false
             ])
             ->add('description', TextareaType::class, [
-                'attr' => array(
-                    'class' => 'form-control',
-                    'placeholder' => 'Enter Description',
-                    'rows' => '7'
-                ),
-                'label' => false,
+                'attr' =>
+                    [
+                        'class' => 'form-control bg-transparent block border-w-2 w-full h-60 text-4xl',
+                        'placeholder' => 'Enter Description',
+                        'rows' => '7'
+                    ],
+                    'label' => false,
+                    'required' => false
             ])
             ->add('imagePath', FileType::class, [
-                'required' => false,
-                'mapped' => false,
-            ]);
-        ;
+                    'attr' =>
+                        [
+                            'class' => 'py-10',
+                        ],
+                    'label' => false,
+                    'required' => false,
+                    'mapped' => false,
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
